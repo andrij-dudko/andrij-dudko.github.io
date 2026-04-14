@@ -163,20 +163,38 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var btn = document.getElementById('my-button'); 
-            if(btn) {
-            btn.addEventListener('click', function(e) {
-                // e.preventDefault(); // Розкоментуй, якщо не хочеш, щоб сторінка перезавантажувалася при натисканні
+    document.addEventListener('DOMContentLoaded', function() {
+        // 1. Відстеження кнопки підписки (вже є у вас)
+        var subBtn = document.getElementById('my-button'); 
+        if(subBtn) {
+            subBtn.addEventListener('click', function() {
                 gtag('event', 'button_click_test', {
-                'event_category': 'engagement',
-                'event_label': 'My Homework Button'
+                    'event_category': 'engagement',
+                    'event_label': 'Subscribe Button'
                 });
-                alert('Подія відправлена в GA4!');
             });
-            }
+        }
+
+        // 2. Відстеження кліків по навігаційному меню
+        document.querySelectorAll('nav a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                gtag('event', 'nav_click', {
+                    'link_text': this.textContent
+                });
+            });
         });
-        </script>
+
+        // 3. Відстеження кліку на "Зв'язатися з автором"
+        var authorLink = document.querySelector('footer a[href="author.html"]');
+        if(authorLink) {
+            authorLink.addEventListener('click', function() {
+                gtag('event', 'author_contact', {
+                    'method': 'footer_link'
+                });
+            });
+        }
+    });
+    </script>
 </body>
 
 </html>
