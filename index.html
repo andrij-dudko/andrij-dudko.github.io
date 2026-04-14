@@ -150,7 +150,7 @@
             <form style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
                 <input type="email" placeholder="Твій Email"
                     style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; width: 60%;">
-                <button type="submit"
+                <button id="my-button" type="submit"
                     style="background: #0057b7; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">ОК</button>
             </form>
         </section>
@@ -162,6 +162,21 @@
         <p><a href="author.html">Зв'язатися з автором</a> | <a href="#">Нагору</a></p>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var btn = document.getElementById('my-button'); 
+            if(btn) {
+            btn.addEventListener('click', function(e) {
+                // e.preventDefault(); // Розкоментуй, якщо не хочеш, щоб сторінка перезавантажувалася при натисканні
+                gtag('event', 'button_click_test', {
+                'event_category': 'engagement',
+                'event_label': 'My Homework Button'
+                });
+                alert('Подія відправлена в GA4!');
+            });
+            }
+        });
+        </script>
 </body>
 
 </html>
